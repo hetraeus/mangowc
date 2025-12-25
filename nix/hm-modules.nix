@@ -98,8 +98,8 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = [cfg.package];
     xdg.configFile = {
-      "mango/config.conf" = lib.mkIf (cfg.settings != "") {
-        text = "exec-once=~/.config/mango/autostart.sh\n" + cfg.settings;
+      "mango/config.conf" =  {
+        text = (lib.optionalString (cfg.autostart_sh != "") "exec-once=~/.config/mango/autostart.sh") + cfg.settings;
       };
       "mango/autostart.sh" = lib.mkIf (cfg.autostart_sh != "") {
         source = autostart_sh;
