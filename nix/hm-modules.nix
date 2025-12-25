@@ -85,7 +85,7 @@ in {
         '';
       };
       autostart_sh = mkOption {
-        description = "WARRNING: This is a shell script, but no need to add shebang";
+        description = "WARNING: This is a shell script, but no need to add shebang";
         type = types.lines;
         default = "";
         example = ''
@@ -99,7 +99,7 @@ in {
     home.packages = [cfg.package];
     xdg.configFile = {
       "mango/config.conf" =  {
-        text = (lib.optionalString (cfg.autostart_sh != "") "exec-once=~/.config/mango/autostart.sh") + cfg.settings;
+        text = (lib.optionalString (cfg.autostart_sh != "") "exec-once=~/.config/mango/autostart.sh\n") + cfg.settings;
       };
       "mango/autostart.sh" = lib.mkIf (cfg.autostart_sh != "") {
         source = autostart_sh;
