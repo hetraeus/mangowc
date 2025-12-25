@@ -99,7 +99,7 @@ in {
     home.packages = [cfg.package];
     xdg.configFile = {
       "mango/config.conf" = lib.mkIf (cfg.settings != "") {
-        text = cfg.settings;
+        text = "exec-once=~/.config/mango/autostart.sh\n" + cfg.settings;
       };
       "mango/autostart.sh" = lib.mkIf (cfg.autostart_sh != "") {
         source = autostart_sh;
